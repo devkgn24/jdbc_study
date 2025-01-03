@@ -3,6 +3,7 @@ package com.gn.study.controller;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class E_Insert_Transaction {
@@ -27,7 +28,7 @@ public class E_Insert_Transaction {
 			stmt = conn.createStatement();
 			// 7. SQL문 실행
 			// 데이터 존재 여부 -> 갯수
-			String str = "테스트3";
+			String str = "철수";
 			String sql1 = "SELECT COUNT(*) FROM test WHERE t_name='"+str+"'";
 			rs = stmt.executeQuery(sql1);
 			int cnt = 0;
@@ -48,9 +49,14 @@ public class E_Insert_Transaction {
 			} else {
 				System.out.println("이미 존재하는 이름입니다.");
 			}
-			
-			
+			conn.commit();
 		}catch(Exception e) {
+			// 9. 결과 데이터베이스에 반영
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		}finally {
 			try {

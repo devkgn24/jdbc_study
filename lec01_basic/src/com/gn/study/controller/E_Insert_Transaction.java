@@ -29,6 +29,7 @@ public class E_Insert_Transaction {
 			// 7. SQL문 실행
 			// 데이터 존재 여부 -> 갯수
 			String str = "철수";
+			
 			String sql1 = "SELECT COUNT(*) FROM test WHERE t_name='"+str+"'";
 			rs = stmt.executeQuery(sql1);
 			int cnt = 0;

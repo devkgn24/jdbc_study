@@ -27,9 +27,7 @@ public class Select_One_Scanner {
 			System.out.println("조회하고자 하는 행의 번호를 입력하세요");
 			System.out.print("번호 : ");
 			int num = sc.nextInt();
-			// 1
 			Class.forName("org.mariadb.jdbc.Driver");
-			// 2
 			String url = "jdbc:mariadb://127.0.0.1:3306/jdbc_basic";
 			String id = "scott";
 			String pw = "tiger";

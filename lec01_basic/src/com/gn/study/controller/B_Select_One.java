@@ -10,7 +10,6 @@ import com.gn.study.model.vo.Test;
 public class B_Select_One {
 	// 1. Map형태로 추출
 	public static void main(String[] args) {
-		
 		// (1) 작업용 객체 선언
 		Connection conn = null;
 		Statement stmt = null;

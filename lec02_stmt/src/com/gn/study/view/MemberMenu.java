@@ -1,8 +1,10 @@
 package com.gn.study.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.gn.study.controller.MemberController;
+import com.gn.study.model.vo.Member;
 
 public class MemberMenu {
 	private Scanner sc = new Scanner(System.in);
@@ -28,10 +30,19 @@ public class MemberMenu {
 			sc.nextLine();
 			switch(menu) {
 				case 1 : createMember();break;
+				case 2 : selectMemberAll();break;
 				case 0 : System.out.println("잘가요~안녕~");return;
 				default : System.out.println("잘못된 번호입니다.");
 			}
 		}
+	}
+	
+	// 전체 회원 조회
+	public void selectMemberAll() {
+		System.out.println("=== 회원 전체 조회 ===");
+		List<Member> list = mc.selectMemberAll();
+		// (1) 만약에 list가 비어있다면 -> 조회된 결과가 없습니다.
+		// (2) Member 목록 출력
 	}
 	
 	// 회원 추가 화면
@@ -49,8 +60,13 @@ public class MemberMenu {
 		String memberPhone = sc.nextLine();
 		System.out.print("성별:");
 		String memberGender = sc.nextLine();
-		mc.insertMember(memberId, memberPw, memberName, memberEmail, memberPhone, memberGender);
 		
+		int result = mc.insertMember(memberId, memberPw, memberName, memberEmail, memberPhone, memberGender);
+		if(result > 0) {
+			System.out.println("성공!!");
+		} else {
+			System.out.println("실패ㅠㅠ");
+		}
 	}
 	
 	

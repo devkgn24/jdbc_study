@@ -32,9 +32,39 @@ public class MemberMenu {
 				case 1 : createMember();break;
 				case 2 : selectMemberAll();break;
 				case 3 : searchMemberOneById(); break;
+				case 5 : updateMember(); break;
 				case 0 : System.out.println("잘가요~안녕~");return;
 				default : System.out.println("잘못된 번호입니다.");
 			}
+		}
+	}
+	
+	public void updateMember() {
+		// 관리자 -> 모든 회원 정보 수정
+		// 사용자 -> 내것만 수정
+		System.out.println("=== 회원 정보 수정 ===");
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		System.out.print("비밀번호 : ");
+		String pw = sc.nextLine();	
+		Member m = mc.selectMemberOneByIdAndPw(id,pw);
+		if(m != null) {
+			System.out.println(m);
+			// 이메일, 전화번호, 이름 -> 수정
+			System.out.print("이름 : ");
+			String name = sc.nextLine();
+			System.out.print("전화번호 : ");
+			String phone = sc.nextLine();
+			System.out.print("이메일 : ");
+			String email = sc.nextLine();
+			int result = mc.updateMemberInfo(        name,phone,email);
+			if(result > 0) {
+				System.out.println("수정 성공!");
+			} else {
+				System.out.println("수정 실패ㅜㅜ");
+			}
+		} else {
+			System.out.println("잘못된 아이디 혹은 비밀번호입니다.");
 		}
 	}
 	

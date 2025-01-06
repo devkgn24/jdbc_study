@@ -31,10 +31,26 @@ public class MemberMenu {
 			switch(menu) {
 				case 1 : createMember();break;
 				case 2 : selectMemberAll();break;
+				case 3 : searchMemberOneById(); break;
 				case 0 : System.out.println("잘가요~안녕~");return;
 				default : System.out.println("잘못된 번호입니다.");
 			}
 		}
+	}
+	
+	// 아이디 기준 회원 조회
+	public void searchMemberOneById() {
+		System.out.println("=== 회원 아이디 검색 ===");
+		System.out.print("아이디 : ");
+		String id = sc.nextLine();
+		// WHERE -> =(UNIQUE / X) / LIKE
+		Member m = mc.selectMemberOneById(id);
+		if(m != null) {
+			System.out.println(m);
+		} else {
+			System.out.println(id+"는 존재하지 않는 정보입니다.");
+		}
+		
 	}
 	
 	// 전체 회원 조회
@@ -42,6 +58,13 @@ public class MemberMenu {
 		System.out.println("=== 회원 전체 조회 ===");
 		List<Member> list = mc.selectMemberAll();
 		// (1) 만약에 list가 비어있다면 -> 조회된 결과가 없습니다.
+		if(list.isEmpty()) {
+			System.out.println("조회된 결과가 없습니다.");
+		} else {
+			for(Member m : list) {
+				System.out.println(m);
+			}
+		}
 		// (2) Member 목록 출력
 	}
 	

@@ -57,7 +57,7 @@ public class MemberMenu {
 			String phone = sc.nextLine();
 			System.out.print("이메일 : ");
 			String email = sc.nextLine();
-			int result = mc.updateMemberInfo(        name,phone,email);
+			int result = mc.updateMemberInfo(m.getMemberNo(),name,phone,email);
 			if(result > 0) {
 				System.out.println("수정 성공!");
 			} else {

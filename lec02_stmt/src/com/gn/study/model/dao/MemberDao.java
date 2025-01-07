@@ -10,6 +10,67 @@ import java.util.List;
 import com.gn.study.model.vo.Member;
 
 public class MemberDao {
+	public int updateMemberInfo(int memNo, String memName, String memPhone, String memEmail) {
+		Connection conn = null;
+		Statement stmt = null;
+		int result = 0;
+		try{
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mariadb://127.0.0.1:3306/jdbc_basic";
+			String user = "scott";
+			String pw ="tiger";
+			conn = DriverManager.getConnection(url, user, pw);
+			stmt = conn.createStatement();
+			String sql = "UPDATE `member` "
+					+"SET m_name = '"+memName+"' "
+					+",m_email = '"+memEmail+"'"
+					+",m_phone = '"+memPhone+"'"
+					+"WHERE m_no = "+memNo;
+			result = stmt.executeUpdate(sql);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	public Member selectMemberOneByIdAndPw(String memId, String memPw) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mariadb://127.0.0.1:3306/jdbc_basic";
+			String user = "scott";
+			String pw ="tiger";
+			conn = DriverManager.getConnection(url, user, pw);
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM member WHERE m_id = '"+memId+"' AND m_pw = '"+memPw+"'");
+			if(rs.next()) {
+				m = new Member(rs.getInt("m_no"),rs.getString("m_id"),rs.getString("m_pw"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return m;
+	}
+	
+	
 	public Member selectMemberOneById(String memId) {
 		Connection conn = null;
 		Statement stmt = null;

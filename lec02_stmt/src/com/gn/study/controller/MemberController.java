@@ -7,6 +7,14 @@ import com.gn.study.model.vo.Member;
 
 public class MemberController {
 	
+	public int updateMemberInfo(int no, String name, String phone, String email) {
+		return new MemberDao().updateMemberInfo(no,name,phone,email);
+	}
+	
+	public Member selectMemberOneByIdAndPw(String id, String pw) {
+		return new MemberDao().selectMemberOneByIdAndPw(id,pw);
+	}
+	
 	public Member selectMemberOneById(String memberId) {
 //		Member m = new MemberDao().selectMemberOneById(memberId);
 //		return m;

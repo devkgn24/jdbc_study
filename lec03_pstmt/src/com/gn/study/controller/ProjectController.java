@@ -8,6 +8,16 @@ import com.gn.study.model.vo.ProjectVo;
 public class ProjectController {
 	private ProjectDao pd = new ProjectDao();
 	
+	public int updateProjectOne(int projectNo, String projectName) {
+		int result = pd.updateProjectOne(projectNo, projectName);
+		return result;
+	}
+	
+	public List<ProjectVo> selectProjectAllByManagerName(String managerName){
+		List<ProjectVo> list = pd.selectProjectAllByManagerName(managerName);
+		return list;
+	}
+	
 	public List<ProjectVo> selectProjectAllByName(String projectName){
 		List<ProjectVo> list = pd.selectProjectAllByName(projectName);
 		return list;

@@ -28,7 +28,7 @@ public class ProjectMenu {
 			switch(menu) {
 				case 1 : createProject(); break;
 				case 2 : showProjectAll(); break;
-				case 3 : break;
+				case 3 : searchByProjectName(); break;
 				case 4 : break;
 				case 5 : break;
 				case 6 : break;
@@ -38,9 +38,7 @@ public class ProjectMenu {
 		}
 	}
 	
-	public void showProjectAll() {
-		System.out.println("*** 프로젝트 전체 조회 ***");
-		List<ProjectVo> list = pc.selectProjectAll();
+	public void printListProject(List<ProjectVo> list) {
 		if(list.isEmpty()) {
 			System.out.println("조회된 프로젝트 정보가 없습니다.");
 		} else {
@@ -48,6 +46,21 @@ public class ProjectMenu {
 				System.out.println(vo);
 			}
 		}
+	}
+	
+	public void searchByProjectName() {
+		System.out.println("*** 프로젝트 이름 검색 ***");
+		System.out.println("프로젝트 이름을 일부 입력하시면, 관련 프로젝트 정보를 조회해드립니다.");
+		System.out.print("프로젝트 이름 : ");
+		String projectName = sc.nextLine();
+		List<ProjectVo> list = pc.selectProjectAllByName(projectName);
+		printListProject(list);
+	}
+	
+	public void showProjectAll() {
+		System.out.println("*** 프로젝트 전체 조회 ***");
+		List<ProjectVo> list = pc.selectProjectAll();
+		printListProject(list);
 	}
 	
 	public void createProject() {

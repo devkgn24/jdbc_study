@@ -8,6 +8,7 @@ public class ProjectVo {
 	private int projectManager;	// FK(employee의 emp_id) -> 관리자 사번
 	private LocalDateTime regDate;	// 등록일
 	private LocalDateTime modDate;	// 수정일
+	private String managerName;	// 관리자 이름
 	
 	public ProjectVo() {}
 	
@@ -25,6 +26,14 @@ public class ProjectVo {
 		this.projectManager = projectManager;
 		this.regDate = regDate;
 		this.modDate = modDate;
+	}
+	
+	public String getManagerName() {
+		return managerName;
+	}
+	
+	public void setManagerName(String managerName) {
+		this.managerName = managerName; 
 	}
 
 	public int getProjectId() {
@@ -69,11 +78,17 @@ public class ProjectVo {
 
 	@Override
 	public String toString() {
-		return "[projectId=" + projectId 
-				+ ", projectName=" + projectName 
-				+ ", projectManager="+ projectManager 
-				+ ", regDate=" + regDate 
-				+ ", modDate=" + modDate + "]";
+//		System.out.println("프로젝트 매니저 : "+projectManager);
+//		System.out.println("매니저 이름 : "+managerName);
+//		System.out.println("매니저 이름의 타입 : "+(managerName instanceof String));
+		
+		return "[번호 : " + projectId 
+				+ ", 이름 : " + projectName 
+				// projectManager가 없으면 -> 미정
+				// projectManager가 있다면 -> 관리자이름(사번)
+				+ ", 관리자 : "+ (projectManager == 0 ? "미정":managerName+"("+projectManager+")") 
+				+ ", 등록일 : " + regDate 
+				+ ", 수정일 : " + modDate + "]";
 	}
 	
 	

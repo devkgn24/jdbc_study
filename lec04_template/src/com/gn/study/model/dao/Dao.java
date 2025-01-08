@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import com.gn.study.model.vo.Car;
+import static com.gn.study.common.JDBCTemplate.close;
 
 public class Dao {
 	public int insertCarOne(Car car, Connection conn) {
@@ -21,11 +22,12 @@ public class Dao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				if(pstmt != null) pstmt.close();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			close(pstmt);
+//			try {
+//				if(pstmt != null) pstmt.close();
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}
 		}
 		return result;
 	}

@@ -9,6 +9,14 @@ import com.gn.study.model.vo.Car;
 public class Controller {
 	private Service service = new Service();
 	
+	public List<Car> searchCarList(int option, Object obj){
+		return service.searchCarList(option,obj);
+	}
+	
+	public Car selectCarOne(String modelName) {
+		return service.selectCarOne(modelName);
+	}
+	
 	public List<Car> selectCarAll(){
 		return service.selectCarAll();
 	}

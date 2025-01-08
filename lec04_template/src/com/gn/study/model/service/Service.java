@@ -13,6 +13,20 @@ import com.gn.study.model.vo.Car;
 public class Service {
 	private Dao dao = new Dao();
 	
+	public List<Car> searchCarList(int option, Object obj){
+		Connection conn = getConnection();
+		List<Car> list = dao.searchCarList(option,obj,conn);
+		close(conn);
+		return list;
+	}
+	
+	public Car selectCarOne(String modelName) {
+		Connection conn = getConnection();
+		Car car = dao.selectCarOne(conn,modelName);
+		close(conn);
+		return car;
+	}
+	
 	public List<Car> selectCarAll(){
 		Connection conn = getConnection();
 		List<Car> list = dao.selectCarAll(conn);

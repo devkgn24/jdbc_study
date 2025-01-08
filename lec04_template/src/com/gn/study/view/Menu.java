@@ -1,5 +1,6 @@
 package com.gn.study.view;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,12 +28,41 @@ public class Menu {
 			switch(menu) {
 				case 1 : insertCarOne(); break;
 				case 2 : selectCarAll(); break;
-				case 3 : break;
+				case 3 : selectCarOne(); break;
 				case 4 : break;
 				case 5 : break;
 			}	
 		}
 	}
+	
+	public void selectCarOne() {
+		System.out.println("*** 단일 조회 ***");
+		System.out.println("검색 기준으로 삼고 싶은 항목을 선택하세요.");
+		System.out.println("1. 번호 / 2. 모델명 / 3. 가격 / 4. 출시일 ");
+		System.out.print("선택 : ");
+		int option = sc.nextInt();
+		Object obj = new Object();
+		List<Car> list = new ArrayList<Car>();
+		switch(option) {
+			case 1 : // 번호
+				System.out.print("번호 : ");
+				obj = sc.nextInt();break;
+			case 2 : // 모델명
+				sc.nextLine();
+				System.out.print("모델명 : ");
+				obj = sc.nextLine();break;
+			case 3 : // 가격
+				System.out.print("가격 : ");
+				obj = sc.nextInt();break;
+			case 4 : // 출시일
+				sc.nextLine();
+				System.out.print("출시일 : ");
+				obj = sc.nextLine();break;
+		}
+		list = controller.searchCarList(option,obj);
+		printList(list);
+	}
+	
 	public void selectCarAll() {
 		System.out.println("*** 목록 조회 ***");
 		List<Car> list = controller.selectCarAll();

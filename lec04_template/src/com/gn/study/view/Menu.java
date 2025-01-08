@@ -1,8 +1,10 @@
 package com.gn.study.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.gn.study.controller.Controller;
+import com.gn.study.model.vo.Car;
 
 // 사용자가 보게될 화면
 // - 사용자에게 정보 입력받기
@@ -23,14 +25,30 @@ public class Menu {
 			int menu = sc.nextInt();
 			sc.nextLine();
 			switch(menu) {
-				case 1 : insertCarOne();break;
-				case 2 : break;
+				case 1 : insertCarOne(); break;
+				case 2 : selectCarAll(); break;
 				case 3 : break;
 				case 4 : break;
 				case 5 : break;
 			}	
 		}
 	}
+	public void selectCarAll() {
+		System.out.println("*** 목록 조회 ***");
+		List<Car> list = controller.selectCarAll();
+		printList(list);
+	}
+	
+	public void printList(List<Car> list) {
+		if(list.isEmpty()) {
+			System.out.println("조회된 결과가 없습니다.");
+		}else {
+			for(Car c : list) {
+				System.out.println(c);
+			}
+		}
+	}
+	
 	public void insertCarOne() {
 		System.out.println("*** 추가 ***");
 		System.out.println("모델명, 가격, 출시일을 입력하세요.");
@@ -48,7 +66,12 @@ public class Menu {
 			date = sc.nextLine();
 		}
 		int result = controller.insertCarOne(modelName,price,date);
-		
+		dmlResultPrint(result,"추가");
+	}
+	
+	public void dmlResultPrint(int result, String menuName) {
+		if(result > 0) System.out.println(menuName+"이(가) 정상 수행되었습니다.");
+		else System.out.println(menuName+"중 오류가 발생하였습니다.");
 	}
 	
 	

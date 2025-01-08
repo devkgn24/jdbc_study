@@ -3,6 +3,7 @@ package com.gn.study.common;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class JDBCTemplate {
 	public static Connection getConnection() {
@@ -33,6 +34,16 @@ public class JDBCTemplate {
 		try {
 			if(pstmt != null && !pstmt.isClosed()) {
 				pstmt.close();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void close(ResultSet rs) {
+		try {
+			if(rs != null && !rs.isClosed()) {
+				rs.close();
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

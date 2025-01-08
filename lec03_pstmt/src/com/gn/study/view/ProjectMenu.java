@@ -31,7 +31,7 @@ public class ProjectMenu {
 				case 3 : searchByProjectName(); break;
 				case 4 : searchByManagerName();break;
 				case 5 : editProjectOne();break;
-				case 6 : break;
+				case 6 : deleteProjectOne();break;
 				case 0 : System.out.println("이용해주셔서 감사합니다.");return;
 				default : System.out.println("메뉴를 잘못 입력하셨습니다.");
 			}	
@@ -40,6 +40,14 @@ public class ProjectMenu {
 	
 	public void deleteProjectOne() {
 		// 전체 목록 조회, 삭제하고자 하는 번호 입력받아서 -> 삭제 처리
+		System.out.println("*** 프로젝트 삭제 ***");
+		List<ProjectVo> list = pc.selectProjectAll();
+		printListProject(list);
+		System.out.println("삭제하고자하는 프로젝트의 번호를 입력하세요.");
+		System.out.print("번호 : ");
+		int projectNo = sc.nextInt();
+		int result = pc.deleteProjectOne(projectNo);
+		printProjectResult(result,"프로젝트 삭제");
 	}
 	
 	public void editProjectOne() {

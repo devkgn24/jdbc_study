@@ -11,6 +11,35 @@ import com.gn.study.model.vo.ProjectVo;
 
 public class ProjectDao {
 	
+	public int deleteProjectOne(int projectNo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mariadb://127.0.0.1:3306/company_project";
+			String user = "scott";
+			String pw = "tiger";
+			conn = DriverManager.getConnection(url, user, pw);	
+			
+			String sql = "DELETE FROM project WHERE project_id = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, projectNo);
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	public int updateProjectOne(int projectNo, String projectName) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

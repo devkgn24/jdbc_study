@@ -8,6 +8,11 @@ import com.gn.study.model.vo.ProjectVo;
 public class ProjectController {
 	private ProjectDao pd = new ProjectDao();
 	
+	public int deleteProjectOne(int projectNo) {
+		int result = pd.deleteProjectOne(projectNo);
+		return result;
+	}
+	
 	public int updateProjectOne(int projectNo, String projectName) {
 		int result = pd.updateProjectOne(projectNo, projectName);
 		return result;

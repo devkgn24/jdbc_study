@@ -12,6 +12,23 @@ import java.util.List;
 import com.gn.study.model.vo.Car;
 
 public class Dao {
+	
+	public int deleteCarOne(int carNo, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = "DELETE FROM car WHERE car_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, carNo);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public List<Car> searchCarList(int option, Object obj,Connection conn){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

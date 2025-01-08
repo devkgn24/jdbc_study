@@ -13,6 +13,13 @@ import com.gn.study.model.vo.Car;
 public class Service {
 	private Dao dao = new Dao();
 	
+	public int deleteCarOne(int carNo) {
+		Connection conn = getConnection();
+		int result = dao.deleteCarOne(carNo,conn);
+		close(conn);
+		return result;
+	}
+	
 	public List<Car> searchCarList(int option, Object obj){
 		Connection conn = getConnection();
 		List<Car> list = dao.searchCarList(option,obj,conn);

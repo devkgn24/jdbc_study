@@ -30,9 +30,20 @@ public class Menu {
 				case 2 : selectCarAll(); break;
 				case 3 : selectCarOne(); break;
 				case 4 : break;
-				case 5 : break;
+				case 5 : deleteCarOne(); break;
 			}	
 		}
+	}
+	
+	public void deleteCarOne() {
+		System.out.println("*** 삭제 ***");
+		List<Car> list = controller.selectCarAll();
+		printList(list);
+		System.out.println("삭제하고자 하는 자동차 번호를 입력하세요.");
+		System.out.print("번호 : ");
+		int carNo = sc.nextInt();
+		int result = controller.deleteCarOne(carNo);
+		dmlResultPrint(result,"삭제");
 	}
 	
 	public void selectCarOne() {
@@ -42,6 +53,7 @@ public class Menu {
 		System.out.print("선택 : ");
 		int option = sc.nextInt();
 		Object obj = new Object();
+		
 		List<Car> list = new ArrayList<Car>();
 		switch(option) {
 			case 1 : // 번호

@@ -9,6 +9,10 @@ import com.gn.study.model.vo.Car;
 public class Controller {
 	private Service service = new Service();
 	
+	public int deleteCarOne(int carNo) {
+		return service.deleteCarOne(carNo);
+	}
+	
 	public List<Car> searchCarList(int option, Object obj){
 		return service.searchCarList(option,obj);
 	}

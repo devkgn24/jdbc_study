@@ -1,7 +1,9 @@
 package com.gn.study.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.gn.study.controller.Controller;
@@ -29,9 +31,52 @@ public class Menu {
 				case 1 : insertCarOne(); break;
 				case 2 : selectCarAll(); break;
 				case 3 : selectCarOne(); break;
-				case 4 : break;
+				case 4 : updateCarOne(); break;
 				case 5 : deleteCarOne(); break;
 			}	
+		}
+	}
+	
+	public void updateCarOne() {
+		System.out.println("*** 수정 ***");
+		List<Car> list = controller.selectCarAll();
+		printList(list);
+		System.out.println("어떤 모델의 정보를 수정하시겠습니까?");
+		System.out.print("번호 : ");
+		int carNo = sc.nextInt();
+		sc.nextLine();
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		System.out.print("모델명을 수정하시겠습니까? ");
+		char modelFlag = sc.nextLine().charAt(0);
+		if(modelFlag == 'Y') {
+			System.out.print("모델명 : ");
+			String modelName = sc.nextLine();
+			map.put("car_model", modelName);
+		}
+		
+		System.out.print("가격을 수정하시겠습니까? ");
+		char priceFlag = sc.nextLine().charAt(0);
+		if(priceFlag == 'Y') {
+			System.out.print("가격 : ");
+			int price = sc.nextInt();
+			map.put("car_price", price);
+			sc.nextLine();
+		}
+		
+		System.out.print("출시일을 수정하시겠습니까? ");
+		char dateFlag = sc.nextLine().charAt(0);
+		if(dateFlag == 'Y') {
+			System.out.print("출시일 : ");
+			String date = sc.nextLine();
+			map.put("car_date", date);
+		}
+		
+		if(map.size() == 0) {
+			System.out.println("수정 사항을 선택하지 않으셨습니다.");
+		} else {
+			int result = controller.updateCarOne(carNo,map);
+			dmlResultPrint(result,"수정");	
 		}
 	}
 	

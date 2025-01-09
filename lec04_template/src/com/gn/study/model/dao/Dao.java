@@ -7,11 +7,49 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.gn.study.model.vo.Car;
 
 public class Dao {
+	
+	public int updateCarOne(int carNo, 
+			Map<String,Object> map, Connection conn) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			String sql = "UPDATE car SET ";
+			Set<String> keySet = map.keySet();
+			Iterator<String> itKey = keySet.iterator();
+			int cnt = 0;
+			int leng = map.size();
+			while(itKey.hasNext()) {
+				String key = itKey.next();
+				sql += key + " = ";
+				Object obj = map.get(key);
+				switch(key) {
+					case "car_model" : sql += "'"+String.valueOf(obj)+"'"; break;
+					case "car_price" : sql += (Integer)obj; break;
+					case "car_date" : sql += "STR_TO_DATE('"+String.valueOf(obj)+"','%Y-%m-%d')";break;
+				}
+				cnt++;
+				if(cnt < leng && cnt != leng) {
+					sql += ", ";
+				}
+			}
+			sql +=" WHERE car_no = "+carNo;
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	public int deleteCarOne(int carNo, Connection conn) {
 		PreparedStatement pstmt = null;

@@ -5,6 +5,7 @@ import static com.gn.study.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.gn.study.model.dao.Dao;
 import com.gn.study.model.vo.Car;
@@ -12,6 +13,13 @@ import com.gn.study.model.vo.Car;
 // DB에 접속 -> Connection 객체 생성
 public class Service {
 	private Dao dao = new Dao();
+	
+	public int updateCarOne(int carNo, Map<String,Object> map) {
+		Connection conn = getConnection();
+		int result = dao.updateCarOne(carNo, map,conn);
+		close(conn);
+		return result;
+	} 
 	
 	public int deleteCarOne(int carNo) {
 		Connection conn = getConnection();

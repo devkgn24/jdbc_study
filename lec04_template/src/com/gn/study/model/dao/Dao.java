@@ -26,7 +26,7 @@ public class Dao {
 			Iterator<String> itKey = keySet.iterator();
 			int cnt = 0;
 			int leng = map.size();
-			while(itKey.hasNext()) {
+			while(itKey.hasNext()) {   
 				String key = itKey.next();
 				sql += key + " = ";
 				Object obj = map.get(key);
